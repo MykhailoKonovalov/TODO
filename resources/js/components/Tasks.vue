@@ -1,14 +1,17 @@
 <template>
 <li>
-    <div class="row" v-bind:class="{done: tasks.performed}">
+    <div class="row" v-bind:class="{done: performed}">
         <div class="col-2">
-            <input type="checkbox" v-on:change="tasks.performed = !tasks.performed">
+            <input type="checkbox"
+                   v-on:click="$emit('done-task', id, performed)"
+                   v-model="checked">
         </div>
         <div class="col-8">
-            <p>{{ tasks.text }}</p>
+            <p>{{ text }}</p>
         </div>
         <div class="col-2">
-            <button class="btn-danger delete" v-on:click="$emit('delete-task', tasks.id)">
+            <button class="btn-danger delete"
+                    v-on:click="$emit('delete-task', id)">
                 &times;
             </button>
         </div>
@@ -19,12 +22,25 @@
 <script>
 export default {
     name: "Tasks",
+    data() {
+        return {
+            checked: this.performed
+        }
+    },
     props: {
-        tasks: {
-            type: Object,
+        id: {
+            type: Number,
+            required:true
+        },
+        text: {
+            type: String,
+            required: true
+        },
+        performed: {
+            type: Number,
             required:true
         }
-    }
+    },
 }
 </script>
 

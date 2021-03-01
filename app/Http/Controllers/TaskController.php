@@ -69,7 +69,7 @@ class TaskController extends Controller
     {
         $this->validate($request, [
             'performed' => ['boolean'],
-            'text' => ['required', 'string'],
+            'text' => ['string'],
         ]);
         if (Task::find($id)->exists()) {
             $task = Task::find($id);

@@ -4,7 +4,11 @@
         <ul>
             <TasksComponent
             v-for="tasks of tasks"
-            v-bind:tasks="tasks"
+            v-bind:key="tasks.id"
+            v-bind:id="tasks.id"
+            v-bind:text="tasks.text"
+            v-bind:performed="tasks.performed"
+            v-on:done-task="doneTask"
             v-on:delete-task="deleteTask"
             ></TasksComponent>
         </ul>
@@ -22,6 +26,9 @@ export default {
     methods: {
         deleteTask(id) {
             this.$emit('delete-task', id)
+        },
+        doneTask(id, performed) {
+            this.$emit('done-task', id, performed)
         }
     }
 }

@@ -19,9 +19,8 @@ export default {
         onSubmit() {
             if (this.text.trim()) {
                 const newTask = {
-                    id: Date.now(),
                     text: this.text,
-                    completed: false
+                    performed: false
                 }
 
                 this.$emit('add-task', newTask)
